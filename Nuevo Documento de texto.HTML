@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flor Roja - I LOVE YOU</title>
+    <style>
+        body {
+            background-color: black;
+            text-align: center;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            background-color: transparent;
+        }
+        h1 {
+            font-size: 30px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas"></canvas>
+    <h1>I LOVE YOU ❤</h1>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = 500;
+        canvas.height = 500;
+
+        function drawPetal(x, y, angle) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            ctx.fillStyle = "red";
+            ctx.beginPath();
+            ctx.ellipse(0, 0, 50, 80, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawFlower() {
+            let centerX = canvas.width / 2;
+            let centerY = 200;
+
+            // Dibujar pétalos
+            for (let i = 0; i < 6; i++) {
+                drawPetal(centerX, centerY, (Math.PI / 3) * i);
+            }
+
+            // Dibujar centro de la flor
+            ctx.fillStyle = "yellow";
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 30, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Dibujar tallo
+            ctx.fillStyle = "green";
+            ctx.fillRect(centerX - 10, centerY + 30, 20, 200);
+
+            // Dibujar hojas
+            ctx.beginPath();
+            ctx.ellipse(centerX - 50, centerY + 120, 40, 20, Math.PI / 4, 0, Math.PI * 2);
+            ctx.ellipse(centerX + 50, centerY + 180, 40, 20, -Math.PI / 4, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        drawFlower();
+    </script>
+
+</body>
+</html>
